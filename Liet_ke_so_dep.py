@@ -1,27 +1,25 @@
-def generate_palindromes(length, prefix, palindromes):
-    if length == 0:
-        palindromes.append(int(prefix))
-        return
-    for digit in ['0', '2', '4', '6', '8']:
-        new_prefix = digit + prefix + digit
-        generate_palindromes(length - 2, new_prefix, palindromes)
-
-def list_palindromes_less_than_n(n):
-    palindromes = []
-    for length in range(1, n):
-        if length % 2 == 0:
-            continue
-        generate_palindromes(length, '', palindromes)
-    result = []
-    for p in palindromes:
-        if p < n:
-            result.append(p)
-    return result
-
-# Đọc số bộ test
 t = int(input())
 
-for i in range(t):
+a = []
+
+def check(n):
+    for i in n:
+        if int(i) % 2 == 1:
+            return False
+    return True
+
+num = 2
+while num <= 888:
+    if check(str(num)):
+        tmp = str(num)
+        a.append(int(tmp + tmp[::-1]))
+    num += 2
+
+while t > 0:
     n = int(input())
-    palindromes = list_palindromes_less_than_n(n)
-    print(*palindromes)
+    for i in a:
+        if i >= n:
+            break
+        print(i, end = ' ')
+    print()
+    t -= 1

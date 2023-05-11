@@ -1,29 +1,19 @@
-def get_sum(s1, s2):
-    return str(int(s1) + int(s2))
+n = int(input())
 
-def get_min_sum(X1, X2):
-    p, q = map(str, input().split())
-    X1 = X1.replace(p, q)
-    X2 = X2.replace(p, q)
-    X1_sorted = ''.join(sorted(X1))
-    X2_sorted = ''.join(sorted(X2))
-    X1_sum = int(X1_sorted)
-    X2_sum = int(X2_sorted)
-    return get_sum(str(X1_sum), str(X2_sum))
+def cv(a, b, p, q):
+    a = a.replace(p, q)
+    b = b.replace(p, q)
+    return int(a) + int(b)
 
-def get_max_sum(X1, X2):
-    p, q = map(str, input().split())
-    X1 = X1.replace(p, q)
-    X2 = X2.replace(p, q)
-    X1_sorted = ''.join(sorted(X1, reverse=True))
-    X2_sorted = ''.join(sorted(X2, reverse=True))
-    X1_sum = int(X1_sorted)
-    X2_sum = int(X2_sorted)
-    return get_sum(str(X1_sum), str(X2_sum))
-
-# main
-T = int(input())
-for i in range(T):
-    X1 = input().strip()
-    X2 = input().strip()
-    print(get_min_sum(X1, X2), get_max_sum(X1, X2))
+while n > 0:
+    [p, q] = input().split()
+    s = input().split()
+    if(len(s) > 1):
+        a, b = s[0], s[1]
+    else:
+        a = s[0]
+        b = input()
+    x = cv(a, b, p, q)
+    y = cv(a, b, q, p)
+    print(min(x, y), max(x, y)) 
+    n -= 1

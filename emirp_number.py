@@ -1,31 +1,26 @@
-def is_prime(n):
-    """Kiểm tra n có phải số nguyên tố không."""
-    if n < 2:
-        return False
-    for i in range(2, int(n ** 0.5) + 1):
-        if n % i == 0:
-            return False
-    return True
+import math
+from pickle import TRUE
 
-
-def reverse_string(s):
-    """Đảo ngược chuỗi s."""
-    return s[::-1]
-
-
-def is_emirp(n):
-    """Kiểm tra n có phải là số Emirp hay không."""
-    if not is_prime(n):
-        return False
-    reverse_n = int(reverse_string(str(n)))
-    return n != reverse_n and is_prime(reverse_n)
-
-
-# Đọc số lượng bộ test
 t = int(input())
 
-# Duyệt qua các bộ test
-for _ in range(t):
+isPrime = [1] * 1000005
+isPrime[0] = isPrime[1] = 0
+
+for i in range (2, 1000):
+    if isPrime[i] == 1:
+        j = i * i
+        while j <= int(1e6):
+            isPrime[j] = 0
+            j += i
+
+while t > 0:
     n = int(input())
-    emirps = [str(x) for x in range(13, n) if is_emirp(x)]
-    print(" ".join(emirps))
+    dic = {}
+    for i in range(13, n):
+        num = int(str(i)[::-1])
+        if isPrime[i] == 0 or isPrime[num] == 0 or num >= n or num in dic or i == num:
+            continue
+        print(i, num, end = ' ')
+        dic[num] = dic[i] = 1
+    print()
+    t -= 1
